@@ -1,0 +1,1589 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Mindal Mata Yatra | Arvind Thapliyal Homestay</title>
+    <meta name="description" content="Welcome to the Mindal Mata Mandir Yatra. Experience pure, devotional Himalayan stay at Arvind Thapliyal Homestay in Midal Village, Pangi Valley.">
+    <meta name="keywords" content="Mindal Mata Mandir, Pangi homestay, Yatra basecamp, Himachal village stay, Arvind Thapliyal Homestay, Spiritual stay Himachal">
+    <meta name="author" content="Arvind Thapliyal">
+    <meta name="theme-color" content="#ea580c">
+    <meta property="og:title" content="Arvind Thapliyal Homestay | Mindal Mata Yatra Base">
+    <meta property="og:description" content="Divine Blessings and Himalayan Serenity in the heart of Midal Village.">
+    <meta property="og:type" content="website">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Rozha+One&family=Tiro+Devanagari+Hindi&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                        serif: ['Rozha One', 'serif'],
+                        hindi: ['Tiro Devanagari Hindi', 'serif'],
+                    },
+                    colors: {
+                        brand: {
+                            saffron: '#ea580c',
+                            lightSaffron: '#f97316',
+                            maroon: '#7f1d1d',
+                            gold: '#eab308',
+                            dark: '#1a1008',
+                            light: '#fffcf5',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --saffron: #ea580c;
+            --maroon: #7f1d1d;
+            --gold: #eab308;
+            --dark: #1a1008;
+            --light: #fffcf5;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            background-color: var(--light);
+        }
+        .dark body { background-color: var(--dark); }
+
+        .heading-serif { font-family: 'Rozha One', serif; }
+        .lang-hi .heading-serif { font-family: 'Tiro Devanagari Hindi', serif; }
+        .lang-hi { font-family: 'Tiro Devanagari Hindi', serif; }
+
+        /* ── Glassmorphism ── */
+        .glass {
+            background: rgba(255, 252, 245, 0.88);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(234, 88, 12, 0.15);
+        }
+        .dark .glass {
+            background: rgba(26, 16, 8, 0.90);
+            border-bottom: 1px solid rgba(234, 88, 12, 0.1);
+        }
+
+        /* ── Scrollbar ── */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--light); }
+        .dark ::-webkit-scrollbar-track { background: var(--dark); }
+        ::-webkit-scrollbar-thumb { background: var(--saffron); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--maroon); }
+
+        /* ── Loader ── */
+        #loader {
+            position: fixed; inset: 0;
+            background: var(--light);
+            z-index: 9999;
+            display: flex; justify-content: center; align-items: center;
+            transition: opacity 0.6s ease-out;
+        }
+        .dark #loader { background: var(--dark); }
+        .loader-ring {
+            width: 70px; height: 70px;
+            border: 3px solid rgba(234,88,12,0.15);
+            border-top-color: var(--saffron);
+            border-radius: 50%;
+            animation: spin 1.4s linear infinite;
+        }
+        .loader-ring-2 {
+            position: absolute;
+            width: 50px; height: 50px;
+            border: 3px solid rgba(234,180,8,0.2);
+            border-bottom-color: var(--gold);
+            border-radius: 50%;
+            animation: spin 1.8s linear reverse infinite;
+        }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        /* ── Reveal ── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.75s ease-out, transform 0.75s ease-out;
+        }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* ── Video Background ── */
+        .video-container {
+            position: absolute; top: 0; left: 0;
+            width: 100%; height: 100%; overflow: hidden; z-index: 0;
+        }
+        .video-container video {
+            min-width: 100%; min-height: 100%;
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+        }
+
+        /* ── Floating Diyas ── */
+        .diya-particle {
+            position: absolute;
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #fbbf24 0%, #ea580c 60%, transparent 80%);
+            box-shadow: 0 0 8px 4px rgba(251,191,36,0.5);
+            animation: floatUp var(--dur, 8s) ease-in infinite;
+            animation-delay: var(--delay, 0s);
+            bottom: 10%;
+            opacity: 0;
+        }
+        @keyframes floatUp {
+            0%   { transform: translateY(0) scale(1); opacity: 0; }
+            10%  { opacity: 0.8; }
+            80%  { opacity: 0.4; }
+            100% { transform: translateY(-80vh) scale(0.3); opacity: 0; }
+        }
+
+        /* ── Image Zoom ── */
+        .img-hover-zoom { overflow: hidden; }
+        .img-hover-zoom img { transition: transform 0.8s ease; }
+        .img-hover-zoom:hover img { transform: scale(1.08); }
+
+        /* ── Gold Text Shimmer ── */
+        .gold-shimmer {
+            background: linear-gradient(90deg, #eab308 0%, #fde68a 40%, #eab308 60%, #b45309 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 3s linear infinite;
+        }
+        @keyframes shimmer { 0% { background-position: 0% center; } 100% { background-position: 200% center; } }
+
+        /* ── Route Line ── */
+        .route-line {
+            position: absolute; left: 23px; top: 0; bottom: 0;
+            width: 2px; background: rgba(234,88,12,0.25); z-index: 0;
+        }
+        .route-dot {
+            width: 16px; height: 16px; border-radius: 50%;
+            background: #ea580c; border: 4px solid var(--light);
+            position: relative; z-index: 1; flex-shrink: 0;
+        }
+        .dark .route-dot { border-color: #1a1008; }
+
+        /* ── Section Divider ── */
+        .mandala-divider {
+            width: 100%; height: 2px;
+            background: linear-gradient(90deg, transparent 0%, #ea580c 30%, #eab308 50%, #ea580c 70%, transparent 100%);
+            position: relative;
+        }
+        .mandala-divider::after {
+            content: '✦';
+            position: absolute; left: 50%; top: 50%;
+            transform: translate(-50%,-50%);
+            background: var(--light); color: var(--gold);
+            padding: 0 12px; font-size: 1.1rem;
+        }
+        .dark .mandala-divider::after { background: var(--dark); }
+
+        /* ── Stats Counter ── */
+        .stat-card {
+            position: relative; overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        .stat-card:hover { transform: translateY(-4px); }
+        .stat-card::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: radial-gradient(circle at 50% 0%, rgba(234,180,8,0.15) 0%, transparent 70%);
+        }
+
+        /* ── Gallery Grid ── */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: auto;
+            gap: 12px;
+        }
+        .gallery-item { position: relative; overflow: hidden; border-radius: 16px; cursor: pointer; }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; display: block; }
+        .gallery-item:hover img { transform: scale(1.07); }
+        .gallery-item .overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(to top, rgba(127,29,29,0.7) 0%, transparent 60%);
+            opacity: 0; transition: opacity 0.4s ease;
+            display: flex; align-items: flex-end; padding: 16px;
+        }
+        .gallery-item:hover .overlay { opacity: 1; }
+        .gallery-item:nth-child(1) { grid-row: span 2; }
+        .gallery-item:nth-child(4) { grid-column: span 2; }
+        @media (max-width: 768px) {
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+            .gallery-item:nth-child(1) { grid-row: span 1; }
+            .gallery-item:nth-child(4) { grid-column: span 1; }
+        }
+
+        /* ── Lightbox ── */
+        #lightbox {
+            position: fixed; inset: 0; z-index: 1000;
+            background: rgba(0,0,0,0.92);
+            display: none; align-items: center; justify-content: center;
+            padding: 20px;
+        }
+        #lightbox.active { display: flex; }
+        #lightbox img { max-width: 90vw; max-height: 85vh; border-radius: 12px; object-fit: contain; }
+        #lightbox-close {
+            position: absolute; top: 20px; right: 24px;
+            font-size: 2rem; color: white; cursor: pointer;
+            transition: color 0.2s;
+        }
+        #lightbox-close:hover { color: var(--gold); }
+        .lightbox-nav {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            background: rgba(255,255,255,0.1); color: white;
+            width: 48px; height: 48px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; transition: background 0.2s; border: none;
+            font-size: 1.2rem;
+        }
+        .lightbox-nav:hover { background: rgba(234,88,12,0.7); }
+        #lb-prev { left: 20px; }
+        #lb-next { right: 20px; }
+
+        /* ── Testimonials ── */
+        .testimonial-slider { overflow: hidden; }
+        .testimonial-track {
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .testimonial-card { flex-shrink: 0; width: 100%; padding: 0 8px; }
+        .testimonial-dot {
+            width: 8px; height: 8px; border-radius: 50%;
+            background: rgba(234,88,12,0.3);
+            transition: all 0.3s ease; cursor: pointer;
+        }
+        .testimonial-dot.active { background: var(--saffron); width: 24px; }
+
+        /* ── Package Card ── */
+        .pkg-card { position: relative; }
+        .pkg-card::after {
+            content: '';
+            position: absolute; inset: -1px; border-radius: 1.5rem; z-index: -1;
+            background: linear-gradient(135deg, rgba(234,88,12,0.4) 0%, transparent 60%);
+            opacity: 0; transition: opacity 0.4s ease;
+        }
+        .pkg-card:hover::after { opacity: 1; }
+
+        /* ── Food Card ── */
+        .food-card {
+            border-radius: 24px; overflow: hidden;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        .food-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 24px 48px rgba(234,88,12,0.15);
+        }
+
+        /* ── Scroll To Top ── */
+        #scroll-top {
+            position: fixed; bottom: 24px; right: 24px;
+            width: 48px; height: 48px; border-radius: 50%;
+            background: var(--saffron); color: white;
+            display: none; align-items: center; justify-content: center;
+            cursor: pointer; z-index: 40; border: none;
+            box-shadow: 0 4px 16px rgba(234,88,12,0.4);
+            transition: all 0.3s ease;
+        }
+        #scroll-top.visible { display: flex; }
+        #scroll-top:hover { background: var(--maroon); transform: translateY(-3px); }
+
+        /* ── WhatsApp Float ── */
+        #wa-float {
+            position: fixed; bottom: 80px; right: 24px;
+            z-index: 40;
+        }
+        @media (min-width: 768px) {
+            #wa-float { bottom: 84px; right: 24px; }
+        }
+        .wa-btn {
+            width: 56px; height: 56px; border-radius: 50%;
+            background: #25D366;
+            display: flex; align-items: center; justify-content: center;
+            color: white; font-size: 1.5rem;
+            box-shadow: 0 4px 20px rgba(37,211,102,0.5);
+            transition: all 0.3s ease; cursor: pointer;
+            border: none; text-decoration: none;
+            animation: waPulse 2.5s ease-in-out infinite;
+        }
+        @keyframes waPulse {
+            0%, 100% { box-shadow: 0 4px 20px rgba(37,211,102,0.5); }
+            50% { box-shadow: 0 4px 32px rgba(37,211,102,0.8), 0 0 0 8px rgba(37,211,102,0.1); }
+        }
+        .wa-btn:hover { transform: scale(1.1); animation: none; box-shadow: 0 6px 24px rgba(37,211,102,0.6); }
+
+        /* ── Audio Toggle ── */
+        #audio-toggle {
+            position: fixed; bottom: 144px; right: 24px;
+        }
+        @media (min-width: 768px) {
+            #audio-toggle { bottom: 152px; right: 24px; }
+        }
+
+        /* ── Custom Modal ── */
+        #custom-modal { transition: opacity 0.3s ease; }
+
+        /* ── Highlight Decoration ── */
+        .highlight-box {
+            position: relative; display: inline-block;
+        }
+        .highlight-box::after {
+            content: '';
+            position: absolute; left: 0; right: 0; bottom: 2px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--saffron), var(--gold));
+            border-radius: 2px;
+        }
+
+        /* ── Section Background Pattern ── */
+        .pattern-bg {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ea580c' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        /* ── Section tag label ── */
+        .section-tag {
+            display: inline-flex; align-items: center; gap: 8px;
+            font-size: 0.75rem; font-weight: 700;
+            letter-spacing: 0.2em; text-transform: uppercase;
+            color: var(--saffron); margin-bottom: 12px;
+        }
+        .section-tag::before, .section-tag::after {
+            content: ''; display: block;
+            width: 28px; height: 1.5px; background: var(--saffron);
+        }
+    </style>
+</head>
+<body class="bg-brand-light text-gray-800 dark:bg-brand-dark dark:text-gray-200 transition-colors duration-300">
+
+    <!-- ═══════════ LOADER ═══════════ -->
+    <div id="loader">
+        <div class="flex flex-col items-center gap-5">
+            <div class="relative w-16 h-16 flex items-center justify-center">
+                <div class="loader-ring"></div>
+                <div class="loader-ring-2"></div>
+                <i class="fa-solid fa-om text-2xl text-brand-saffron absolute"></i>
+            </div>
+            <p class="text-brand-saffron font-semibold tracking-widest uppercase text-xs mt-1" data-i18n="loader_text">Awaiting Mata's Blessings...</p>
+        </div>
+    </div>
+
+    <!-- ═══════════ FLOATING BUTTONS ═══════════ -->
+    <!-- WhatsApp -->
+    <div id="wa-float">
+        <a href="https://wa.me/919418304396?text=Jai%20Mata%20Di!%20I%20am%20interested%20in%20booking%20a%20stay." target="_blank" class="wa-btn" title="Chat on WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <!-- Audio Toggle -->
+    <button id="audio-toggle" class="fixed bg-brand-maroon/90 backdrop-blur text-brand-gold w-12 h-12 rounded-full shadow-lg z-40 flex items-center justify-center border border-brand-gold/40 hover:scale-110 transition-transform" aria-label="Toggle Devotional Audio">
+        <i class="fa-solid fa-volume-xmark text-lg" id="audio-icon"></i>
+    </button>
+
+    <!-- Scroll To Top -->
+    <button id="scroll-top" aria-label="Scroll to top">
+        <i class="fa-solid fa-chevron-up"></i>
+    </button>
+
+    <!-- ═══════════ NAVBAR ═══════════ -->
+    <header class="fixed w-full top-0 z-50 transition-all duration-300" id="navbar">
+        <div class="glass mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <a href="#" class="flex items-center gap-3 flex-shrink-0">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-brand-saffron/20 to-brand-gold/20 border border-brand-gold/30 flex items-center justify-center">
+                        <i class="fa-solid fa-om text-brand-saffron text-xl"></i>
+                    </div>
+                    <div class="flex flex-col leading-tight">
+                        <span class="font-bold text-lg text-brand-maroon dark:text-white tracking-tight">Arvind Thapliyal</span>
+                        <span class="font-light text-[0.6rem] tracking-[0.2em] text-brand-saffron uppercase" data-i18n="logo_sub">Homestay &amp; Yatra Base</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Nav -->
+                <nav class="hidden xl:flex items-center space-x-5">
+                    <a href="#about" class="text-sm font-medium text-gray-700 hover:text-brand-saffron dark:text-gray-300 transition" data-i18n="nav_about">The Yatra</a>
+                    <a href="#how-to-reach" class="text-sm font-medium text-gray-700 hover:text-brand-saffron dark:text-gray-300 transition" data-i18n="nav_route">How to Reach</a>
+                    <a href="#rooms" class="text-sm font-medium text-gray-700 hover:text-brand-saffron dark:text-gray-300 transition" data-i18n="nav_rooms">Ashray</a>
+                    <a href="#packages" class="text-sm font-medium text-gray-700 hover:text-brand-saffron dark:text-gray-300 transition" data-i18n="nav_packages">Packages</a>
+                    <a href="#food" class="text-sm font-medium text-gray-700 hover:text-brand-saffron dark:text-gray-300 transition" data-i18n="nav_food">Sattvic Food</a>
+                    <a href="#guidelines" class="text-sm font-medium text-gray-700 hover:text-brand-saffron dark:text-gray-300 transition" data-i18n="nav_guide">Guidelines</a>
+
+                    <!-- Weather Badge -->
+                    <div class="flex items-center gap-2 bg-brand-saffron/10 px-3 py-1.5 rounded-full border border-brand-saffron/20">
+                        <i class="fa-solid fa-cloud-sun text-brand-saffron text-xs"></i>
+                        <span class="text-xs font-semibold text-brand-maroon dark:text-brand-gold">Midal: 12°C</span>
+                    </div>
+                    <!-- Language -->
+                    <button id="lang-toggle" class="flex items-center gap-1 text-xs font-bold bg-gray-100 dark:bg-gray-700 px-3 py-1.5 rounded-full hover:bg-brand-saffron hover:text-white transition border border-transparent hover:border-brand-saffron/30">
+                        <i class="fa-solid fa-language"></i> <span id="lang-text">HINDI</span>
+                    </button>
+                    <!-- Dark Mode -->
+                    <button id="theme-toggle" class="text-brand-saffron hover:text-brand-gold transition w-8 h-8 rounded-full hover:bg-brand-saffron/10 flex items-center justify-center" aria-label="Toggle Dark Mode">
+                        <i class="fa-solid fa-moon text-base" id="theme-icon"></i>
+                    </button>
+                    <a href="#booking" class="bg-gradient-to-r from-brand-saffron to-brand-maroon text-white px-5 py-2 rounded-full text-sm font-semibold shadow-md shadow-brand-saffron/30 hover:scale-105 transition-transform" data-i18n="nav_book">Plan Yatra</a>
+                </nav>
+
+                <!-- Mobile Controls -->
+                <div class="xl:hidden flex items-center gap-3">
+                    <button id="lang-toggle-mobile" class="text-xs font-bold bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded hover:bg-brand-saffron hover:text-white transition">A/अ</button>
+                    <button id="theme-toggle-mobile" class="text-brand-saffron transition">
+                        <i class="fa-solid fa-moon text-lg" id="theme-icon-mobile"></i>
+                    </button>
+                    <button id="mobile-menu-btn" class="text-brand-maroon dark:text-white focus:outline-none w-9 h-9 flex items-center justify-center">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden xl:hidden glass border-t border-brand-saffron/15 absolute w-full max-h-[80vh] overflow-y-auto">
+            <div class="px-6 py-6 flex flex-col items-center gap-4">
+                <div class="flex items-center gap-2 bg-brand-saffron/10 px-4 py-2 rounded-full border border-brand-saffron/20 w-full justify-center">
+                    <i class="fa-solid fa-cloud-sun text-brand-saffron text-sm"></i>
+                    <span class="text-sm font-semibold text-brand-maroon dark:text-brand-gold">Midal Valley: 12°C</span>
+                </div>
+                <a href="#about" class="mobile-link text-base font-medium text-gray-800 dark:text-gray-200 py-1" data-i18n="nav_about">The Yatra</a>
+                <a href="#how-to-reach" class="mobile-link text-base font-medium text-gray-800 dark:text-gray-200 py-1" data-i18n="nav_route">How to Reach</a>
+                <a href="#rooms" class="mobile-link text-base font-medium text-gray-800 dark:text-gray-200 py-1" data-i18n="nav_rooms">Ashray (Rooms)</a>
+                <a href="#packages" class="mobile-link text-base font-medium text-gray-800 dark:text-gray-200 py-1" data-i18n="nav_packages">Packages</a>
+                <a href="#food" class="mobile-link text-base font-medium text-gray-800 dark:text-gray-200 py-1" data-i18n="nav_food">Sattvic Food</a>
+                <a href="#guidelines" class="mobile-link text-base font-medium text-gray-800 dark:text-gray-200 py-1" data-i18n="nav_guide">Guidelines</a>
+                <a href="#booking" class="mobile-link w-full text-center bg-gradient-to-r from-brand-saffron to-brand-maroon text-white py-3 rounded-full font-bold mt-2 shadow-lg" data-i18n="nav_book">Plan Your Yatra</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ═══════════ HERO ═══════════ -->
+    <section id="home" class="relative h-screen flex items-center justify-center overflow-hidden">
+        <!-- Video Background -->
+        <div class="video-container bg-black">
+            <video autoplay loop muted playsinline class="opacity-60" poster="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=2000">
+                <source src="https://cdn.pixabay.com/video/2021/08/04/83911-584745330_large.mp4" type="video/mp4">
+            </video>
+        </div>
+
+        <!-- Gradient Overlay -->
+        <div class="absolute inset-0 bg-gradient-to-b from-brand-maroon/75 via-brand-dark/55 to-brand-dark/92 z-10"></div>
+
+        <!-- Diya Particles -->
+        <div id="diya-container" class="absolute inset-0 z-10 pointer-events-none overflow-hidden"></div>
+
+        <!-- Hero Content -->
+        <div class="relative z-20 text-center px-4 max-w-5xl mx-auto mt-16">
+            <div class="flex justify-center mb-6 reveal">
+                <div class="w-16 h-16 rounded-full border-2 border-brand-gold/60 flex items-center justify-center bg-brand-maroon/40 backdrop-blur-sm animate-pulse">
+                    <i class="fa-solid fa-bell text-brand-gold text-2xl"></i>
+                </div>
+            </div>
+            <span class="block text-brand-gold font-bold tracking-[0.3em] uppercase mb-4 reveal text-sm drop-shadow-md">Jai Mindal Mata</span>
+            <h1 class="heading-serif text-5xl md:text-7xl lg:text-8xl font-bold text-white leading-tight mb-6 reveal drop-shadow-lg" style="transition-delay:100ms" data-i18n="hero_title">
+                Divine Blessings &amp; <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-saffron to-brand-gold">Himalayan Serenity</span>
+            </h1>
+            <p class="text-lg md:text-xl text-gray-200 mb-10 font-light reveal max-w-3xl mx-auto drop-shadow leading-relaxed" style="transition-delay:200ms" data-i18n="hero_sub">
+                Your spiritual haven for the Mindal Mata Mandir Yatra. Experience peace, devotion, and warm comfort in Pangi Valley.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center reveal" style="transition-delay:300ms">
+                <a href="#booking" class="bg-gradient-to-r from-brand-saffron to-brand-maroon hover:from-brand-lightSaffron hover:to-brand-saffron text-white px-8 py-4 rounded-full font-bold text-lg transition shadow-[0_0_24px_rgba(234,88,12,0.45)] hover:scale-105 flex items-center justify-center gap-2">
+                    <span data-i18n="btn_start">Start Your Yatra</span> <i class="fa-solid fa-arrow-right"></i>
+                </a>
+                <a href="#how-to-reach" class="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-brand-gold/50 px-8 py-4 rounded-full font-semibold text-lg transition flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-map-location-dot text-brand-gold"></i> <span data-i18n="btn_route">View Route</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Scroll Cue -->
+        <a href="#stats" class="absolute bottom-8 z-20 text-brand-gold animate-bounce opacity-80 hover:opacity-100 transition flex flex-col items-center gap-1">
+            <span class="text-xs tracking-widest uppercase font-medium opacity-70">Scroll</span>
+            <i class="fa-solid fa-chevron-down text-2xl"></i>
+        </a>
+    </section>
+
+    <!-- ═══════════ STATS BANNER ═══════════ -->
+    <section id="stats" class="py-14 bg-brand-maroon relative overflow-hidden">
+        <div class="absolute inset-0 pattern-bg opacity-20"></div>
+        <div class="absolute top-0 left-1/4 w-96 h-96 bg-brand-gold/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+                <div class="stat-card text-center py-6 px-4 rounded-2xl bg-white/5 border border-brand-gold/20 reveal">
+                    <div class="text-4xl font-bold gold-shimmer mb-1"><span class="stat-num" data-target="15">0</span>+</div>
+                    <p class="text-white/70 text-sm mt-1" data-i18n="stat1">Years of Hosting</p>
+                </div>
+                <div class="stat-card text-center py-6 px-4 rounded-2xl bg-white/5 border border-brand-gold/20 reveal" style="transition-delay:100ms">
+                    <div class="text-4xl font-bold gold-shimmer mb-1"><span class="stat-num" data-target="2000">0</span>+</div>
+                    <p class="text-white/70 text-sm mt-1" data-i18n="stat2">Yatris Blessed</p>
+                </div>
+                <div class="stat-card text-center py-6 px-4 rounded-2xl bg-white/5 border border-brand-gold/20 reveal" style="transition-delay:200ms">
+                    <div class="text-4xl font-bold gold-shimmer mb-1"><span class="stat-num" data-target="500">0</span>m</div>
+                    <p class="text-white/70 text-sm mt-1" data-i18n="stat3">From the Temple</p>
+                </div>
+                <div class="stat-card text-center py-6 px-4 rounded-2xl bg-white/5 border border-brand-gold/20 reveal" style="transition-delay:300ms">
+                    <div class="text-4xl font-bold gold-shimmer mb-1">4.9<span class="text-2xl">★</span></div>
+                    <p class="text-white/70 text-sm mt-1" data-i18n="stat4">Guest Rating</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════ ABOUT ═══════════ -->
+    <section id="about" class="py-28 bg-brand-light dark:bg-brand-dark relative overflow-hidden">
+        <div class="absolute -right-40 top-20 w-96 h-96 rounded-full bg-brand-saffron/5 blur-3xl pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <!-- Image Block -->
+                <div class="relative reveal">
+                    <div class="relative img-hover-zoom rounded-t-[50%] rounded-b-3xl shadow-2xl border-4 border-brand-saffron/20 p-2 bg-white dark:bg-gray-800">
+                        <img src="https://images.unsplash.com/photo-1627894483216-2138af692e32?q=80&w=1000&auto=format&fit=crop" alt="Himalayan Spiritual View" class="w-full h-auto rounded-t-[50%] rounded-b-2xl object-cover aspect-[4/5]">
+                        <div class="absolute -bottom-6 -right-6 bg-brand-maroon text-white px-5 py-3 rounded-2xl shadow-xl text-sm font-bold border border-brand-gold/30 hidden md:block">
+                            <i class="fa-solid fa-location-dot text-brand-gold mr-1"></i> Midal Village, Pangi Valley
+                        </div>
+                    </div>
+                    <!-- Floating Badge -->
+                    <div class="absolute -top-6 -left-6 bg-brand-gold text-brand-maroon w-24 h-24 rounded-full flex flex-col items-center justify-center shadow-xl font-bold text-center hidden md:flex">
+                        <i class="fa-solid fa-om text-2xl mb-1"></i>
+                        <span class="text-xs leading-tight">Atithi<br>Devo Bhava</span>
+                    </div>
+                </div>
+
+                <!-- Text Block -->
+                <div class="reveal" style="transition-delay:200ms">
+                    <div class="section-tag" data-i18n="about_tag">The Holy Basecamp</div>
+                    <h2 class="heading-serif text-4xl md:text-5xl font-bold mb-6 text-brand-maroon dark:text-brand-gold leading-tight" data-i18n="about_title">Welcome to<br>Midal Village</h2>
+                    <p class="text-gray-700 dark:text-gray-300 mb-5 leading-relaxed text-lg" data-i18n="about_p1">
+                        Nestled in the pristine Pangi Valley, our homestay is just moments away from the revered <strong class="text-brand-maroon dark:text-brand-gold">Mindal Mata Temple</strong>. We provide a pure, tranquil resting place for devotees undertaking the sacred yatra.
+                    </p>
+                    <p class="text-gray-600 dark:text-gray-400 mb-10 leading-relaxed" data-i18n="about_p2">
+                        Built with traditional Himachali architecture, our homestay honors the sanctity of the land. Wake up to the echoes of temple bells, breathe the pure mountain air, and experience warm hospitality where every guest is treated as a form of the divine — <em>Atithi Devo Bhava</em>.
+                    </p>
+
+                    <div class="grid grid-cols-2 gap-5">
+                        <div class="flex items-start gap-4 bg-white dark:bg-gray-800 p-4 rounded-2xl border border-brand-saffron/15 shadow-sm">
+                            <div class="bg-brand-saffron/10 w-11 h-11 flex items-center justify-center rounded-full text-brand-saffron border border-brand-saffron/20 shrink-0">
+                                <i class="fa-solid fa-dharmachakra"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-brand-maroon dark:text-white text-sm" data-i18n="about_f1_t">Temple Proximity</h4>
+                                <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5" data-i18n="about_f1_d">Walking distance to Darshan</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4 bg-white dark:bg-gray-800 p-4 rounded-2xl border border-brand-gold/15 shadow-sm">
+                            <div class="bg-brand-gold/20 w-11 h-11 flex items-center justify-center rounded-full text-brand-gold border border-brand-gold/20 shrink-0">
+                                <i class="fa-solid fa-leaf"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-brand-maroon dark:text-white text-sm" data-i18n="about_f2_t">Sattvic Aura</h4>
+                                <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5" data-i18n="about_f2_d">Pure vegetarian environment</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4 bg-white dark:bg-gray-800 p-4 rounded-2xl border border-brand-saffron/15 shadow-sm">
+                            <div class="bg-brand-saffron/10 w-11 h-11 flex items-center justify-center rounded-full text-brand-saffron border border-brand-saffron/20 shrink-0">
+                                <i class="fa-solid fa-mountain-sun"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-brand-maroon dark:text-white text-sm">Himalayan Views</h4>
+                                <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Breathtaking panoramic vistas</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4 bg-white dark:bg-gray-800 p-4 rounded-2xl border border-brand-gold/15 shadow-sm">
+                            <div class="bg-brand-gold/20 w-11 h-11 flex items-center justify-center rounded-full text-brand-gold border border-brand-gold/20 shrink-0">
+                                <i class="fa-solid fa-fire"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-brand-maroon dark:text-white text-sm">Evening Bhajan</h4>
+                                <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Bonfire &amp; devotional music</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="mandala-divider mx-auto max-w-4xl px-8"></div>
+
+    <!-- ═══════════ HOW TO REACH ═══════════ -->
+    <section id="how-to-reach" class="py-28 bg-white dark:bg-gray-900 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-72 h-72 bg-brand-saffron/5 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 w-64 h-64 bg-brand-gold/5 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16 reveal">
+                <div class="section-tag justify-center" data-i18n="route_tag">Plan Your Journey</div>
+                <h2 class="heading-serif text-3xl md:text-5xl font-bold mt-2 text-brand-maroon dark:text-white" data-i18n="route_title">How to Reach Pangi Valley</h2>
+                <p class="mt-4 text-gray-500 dark:text-gray-400 max-w-2xl mx-auto" data-i18n="route_sub">Pangi Valley is a remote, majestic destination. Choose your path wisely based on the season.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <!-- Summer Route -->
+                <div class="bg-brand-light dark:bg-gray-800 p-8 rounded-3xl border border-brand-saffron/20 shadow-lg reveal relative pl-14">
+                    <div class="absolute top-7 left-0 bg-brand-saffron text-white px-4 py-1 rounded-r-full font-bold text-xs shadow-md z-10 flex items-center gap-1">
+                        <i class="fa-solid fa-sun"></i> Summer Route
+                    </div>
+                    <div class="route-line"></div>
+                    <h3 class="text-xl font-bold text-brand-maroon dark:text-brand-gold mb-6 ml-2">Via Sach Pass</h3>
+                    <div class="space-y-5 relative">
+                        <div class="flex items-start gap-4"><div class="route-dot mt-1 shrink-0"></div><div><h4 class="font-bold dark:text-white text-sm">Pathankot / Dalhousie</h4><p class="text-xs text-gray-500">Starting point — Nearest major Railway</p></div></div>
+                        <div class="flex items-start gap-4"><div class="route-dot mt-1 shrink-0" style="background:#7f1d1d; border-color:#fffcf5"></div><div><h4 class="font-bold dark:text-white text-sm">Bairagarh</h4><p class="text-xs text-gray-500">Last major stop before the pass</p></div></div>
+                        <div class="flex items-start gap-4"><div class="route-dot mt-1 shrink-0" style="background:#fff; border-color:#7f1d1d; border-width:3px"></div><div><h4 class="font-bold text-brand-maroon dark:text-brand-gold text-sm">Sach Pass (14,500 ft)</h4><p class="text-xs text-brand-saffron">Tough terrain, high clearance vehicle needed</p></div></div>
+                        <div class="flex items-start gap-4"><div class="route-dot mt-1 shrink-0" style="background:#22c55e; border-color:#dcfce7"></div><div><h4 class="font-bold dark:text-white text-sm">Midal Village</h4><p class="text-xs text-gray-500">Arrival at Temple Basecamp 🙏</p></div></div>
+                    </div>
+                </div>
+
+                <!-- All-Weather Route -->
+                <div class="bg-brand-light dark:bg-gray-800 p-8 rounded-3xl border border-brand-saffron/20 shadow-lg reveal relative pl-14" style="transition-delay:200ms">
+                    <div class="absolute top-7 left-0 bg-brand-maroon text-white px-4 py-1 rounded-r-full font-bold text-xs shadow-md z-10 flex items-center gap-1">
+                        <i class="fa-solid fa-cloud"></i> All-Weather Route
+                    </div>
+                    <div class="route-line"></div>
+                    <h3 class="text-xl font-bold text-brand-maroon dark:text-brand-gold mb-6 ml-2">Via Manali &amp; Lahaul</h3>
+                    <div class="space-y-5 relative">
+                        <div class="flex items-start gap-4"><div class="route-dot mt-1 shrink-0"></div><div><h4 class="font-bold dark:text-white text-sm">Manali / Kullu</h4><p class="text-xs text-gray-500">Nearest Airport — Bhuntar</p></div></div>
+                        <div class="flex items-start gap-4"><div class="route-dot mt-1 shrink-0" style="background:#7f1d1d; border-color:#fffcf5"></div><div><h4 class="font-bold dark:text-white text-sm">Atal Tunnel &amp; Keylong</h4><p class="text-xs text-gray-500">Smooth highway drive via tunnel</p></div></div>
+                        <div class="flex items-start gap-4"><div class="route-dot mt-1 shrink-0"></div><div><h4 class="font-bold dark:text-white text-sm">Udaipur &amp; Killar</h4><p class="text-xs text-gray-500">Scenic Chenab river valley road</p></div></div>
+                        <div class="flex items-start gap-4"><div class="route-dot mt-1 shrink-0" style="background:#22c55e; border-color:#dcfce7"></div><div><h4 class="font-bold dark:text-white text-sm">Midal Village</h4><p class="text-xs text-gray-500">Arrival at Temple Basecamp 🙏</p></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Travel Tips -->
+            <div class="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-brand-saffron/8 dark:bg-gray-800 rounded-2xl p-6 border border-brand-saffron/15 reveal text-center">
+                    <i class="fa-solid fa-calendar-days text-brand-saffron text-2xl mb-3"></i>
+                    <h4 class="font-bold text-brand-maroon dark:text-white mb-1">Best Season</h4>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">June to October for Yatra. Sach Pass closes in winter.</p>
+                </div>
+                <div class="bg-brand-saffron/8 dark:bg-gray-800 rounded-2xl p-6 border border-brand-saffron/15 reveal text-center" style="transition-delay:100ms">
+                    <i class="fa-solid fa-car-side text-brand-saffron text-2xl mb-3"></i>
+                    <h4 class="font-bold text-brand-maroon dark:text-white mb-1">Transport</h4>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">4x4 or high-clearance vehicle recommended. HRTC buses also available.</p>
+                </div>
+                <div class="bg-brand-saffron/8 dark:bg-gray-800 rounded-2xl p-6 border border-brand-saffron/15 reveal text-center" style="transition-delay:200ms">
+                    <i class="fa-solid fa-mobile-screen text-brand-saffron text-2xl mb-3"></i>
+                    <h4 class="font-bold text-brand-maroon dark:text-white mb-1">Connectivity</h4>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">BSNL has the best coverage. Download offline maps before you depart.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════ ROOMS ═══════════ -->
+    <section id="rooms" class="py-28 bg-brand-light dark:bg-brand-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <div class="section-tag justify-center"><i class="fa-solid fa-bed"></i> <span data-i18n="rooms_tag">Rest &amp; Rejuvenate</span></div>
+                <h2 class="heading-serif text-3xl md:text-5xl font-bold text-brand-maroon dark:text-white" data-i18n="rooms_title">Peaceful Ashray</h2>
+                <p class="mt-4 text-gray-500 dark:text-gray-400 max-w-2xl mx-auto" data-i18n="rooms_sub">Rest your mind and body after a day of devotion. Premium amenities in a traditional setting.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Room 1 -->
+                <div class="food-card bg-white dark:bg-gray-800 shadow-xl border border-brand-saffron/15 reveal">
+                    <div class="relative h-64 img-hover-zoom">
+                        <img src="https://images.unsplash.com/photo-1522771731478-44eb10e5c8e9?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover" alt="Himalayan View Room">
+                        <div class="absolute top-4 left-1/2 -translate-x-1/2 bg-white/90 dark:bg-black/80 backdrop-blur px-4 py-1 rounded-full text-xs font-bold text-brand-saffron border border-brand-saffron/30 whitespace-nowrap">Premium Suite</div>
+                    </div>
+                    <div class="p-7 text-center">
+                        <h3 class="text-lg font-bold mb-1 text-brand-maroon dark:text-white">Himalayan View Suite</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">Wake up to majestic mountain panoramas</p>
+                        <div class="flex flex-wrap justify-center gap-2 mb-5">
+                            <span class="text-xs bg-brand-saffron/8 px-3 py-1 rounded-full text-brand-maroon dark:text-gray-300 border border-brand-saffron/15"><i class="fa-solid fa-bath text-brand-saffron mr-1"></i> Attached Bath</span>
+                            <span class="text-xs bg-brand-saffron/8 px-3 py-1 rounded-full text-brand-maroon dark:text-gray-300 border border-brand-saffron/15"><i class="fa-solid fa-fire text-brand-saffron mr-1"></i> Room Heater</span>
+                            <span class="text-xs bg-brand-saffron/8 px-3 py-1 rounded-full text-brand-maroon dark:text-gray-300 border border-brand-saffron/15"><i class="fa-solid fa-wifi text-brand-saffron mr-1"></i> WiFi</span>
+                        </div>
+                        <button onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})" class="w-full bg-gradient-to-r from-brand-saffron to-brand-maroon hover:opacity-90 text-white py-3 rounded-full font-bold transition shadow-md text-sm">Select Room</button>
+                    </div>
+                </div>
+
+                <!-- Room 2 -->
+                <div class="food-card bg-white dark:bg-gray-800 shadow-xl border border-brand-saffron/15 reveal" style="transition-delay:100ms">
+                    <div class="relative h-64 img-hover-zoom">
+                        <img src="https://images.unsplash.com/photo-1598928506311-c55dd1b764cb?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover" alt="Traditional Room">
+                        <div class="absolute top-4 left-1/2 -translate-x-1/2 bg-white/90 dark:bg-black/80 backdrop-blur px-4 py-1 rounded-full text-xs font-bold text-brand-maroon border border-brand-maroon/30 whitespace-nowrap">Classic Devotee</div>
+                    </div>
+                    <div class="p-7 text-center">
+                        <h3 class="text-lg font-bold mb-1 text-brand-maroon dark:text-white">Traditional Wood Room</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">Authentic Himachali wood-crafted ambiance</p>
+                        <div class="flex flex-wrap justify-center gap-2 mb-5">
+                            <span class="text-xs bg-brand-saffron/8 px-3 py-1 rounded-full text-brand-maroon dark:text-gray-300 border border-brand-saffron/15"><i class="fa-solid fa-droplet text-brand-saffron mr-1"></i> Hot Water</span>
+                            <span class="text-xs bg-brand-saffron/8 px-3 py-1 rounded-full text-brand-maroon dark:text-gray-300 border border-brand-saffron/15"><i class="fa-solid fa-wifi text-brand-saffron mr-1"></i> WiFi</span>
+                            <span class="text-xs bg-brand-saffron/8 px-3 py-1 rounded-full text-brand-maroon dark:text-gray-300 border border-brand-saffron/15"><i class="fa-solid fa-mug-hot text-brand-saffron mr-1"></i> Tea Service</span>
+                        </div>
+                        <button onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})" class="w-full bg-gradient-to-r from-brand-saffron to-brand-maroon hover:opacity-90 text-white py-3 rounded-full font-bold transition shadow-md text-sm">Select Room</button>
+                    </div>
+                </div>
+
+                <!-- Room 3 -->
+                <div class="food-card bg-white dark:bg-gray-800 shadow-xl border border-brand-gold/20 reveal" style="transition-delay:200ms">
+                    <div class="relative h-64 img-hover-zoom">
+                        <img src="https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover" alt="Family Suite">
+                        <div class="absolute top-4 left-1/2 -translate-x-1/2 bg-white/90 dark:bg-black/80 backdrop-blur px-4 py-1 rounded-full text-xs font-bold text-brand-gold border border-brand-gold/30 whitespace-nowrap">Yatra Family</div>
+                    </div>
+                    <div class="p-7 text-center">
+                        <h3 class="text-lg font-bold mb-1 text-brand-maroon dark:text-white">Family Yatra Suite</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">Spacious comfort for groups &amp; families</p>
+                        <div class="flex flex-wrap justify-center gap-2 mb-5">
+                            <span class="text-xs bg-brand-saffron/8 px-3 py-1 rounded-full text-brand-maroon dark:text-gray-300 border border-brand-saffron/15"><i class="fa-solid fa-users text-brand-saffron mr-1"></i> 4–6 Guests</span>
+                            <span class="text-xs bg-brand-saffron/8 px-3 py-1 rounded-full text-brand-maroon dark:text-gray-300 border border-brand-saffron/15"><i class="fa-solid fa-mug-hot text-brand-saffron mr-1"></i> Tea Station</span>
+                            <span class="text-xs bg-brand-saffron/8 px-3 py-1 rounded-full text-brand-maroon dark:text-gray-300 border border-brand-saffron/15"><i class="fa-solid fa-fire text-brand-saffron mr-1"></i> Heater</span>
+                        </div>
+                        <button onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})" class="w-full bg-gradient-to-r from-brand-saffron to-brand-maroon hover:opacity-90 text-white py-3 rounded-full font-bold transition shadow-md text-sm">Select Room</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════ PACKAGES ═══════════ -->
+    <section id="packages" class="py-28 bg-brand-maroon text-white relative overflow-hidden">
+        <div class="absolute inset-0 pattern-bg opacity-15 mix-blend-overlay"></div>
+        <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-brand-gold/10 blur-3xl pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16 reveal">
+                <div class="section-tag justify-center text-brand-gold" style="--tw-text-opacity:1; color: #eab308">
+                    <span style="background:#eab308; height:1.5px; width:28px; display:block;"></span>
+                    Holistic Experiences
+                    <span style="background:#eab308; height:1.5px; width:28px; display:block;"></span>
+                </div>
+                <h2 class="heading-serif text-3xl md:text-5xl font-bold mt-2 text-white" data-i18n="pkg_title">Curated Yatra Packages</h2>
+                <p class="mt-4 text-white/60 max-w-xl mx-auto text-sm" data-i18n="pkg_sub">Choose the pilgrimage experience that resonates with your devotion.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <!-- Package 1 -->
+                <div class="pkg-card bg-black/30 backdrop-blur-md border border-brand-gold/30 rounded-3xl p-8 hover:bg-black/40 transition-all reveal">
+                    <div class="flex justify-between items-start border-b border-brand-gold/20 pb-5 mb-6">
+                        <div>
+                            <h3 class="text-2xl font-bold text-brand-gold">Darshan Basecamp</h3>
+                            <p class="text-white/50 text-sm mt-1">The Essential Pilgrimage</p>
+                        </div>
+                        <span class="bg-brand-saffron px-3 py-1 rounded-full text-sm font-bold shrink-0 ml-2">2 Nights</span>
+                    </div>
+                    <ul class="space-y-3 mb-8 text-sm">
+                        <li class="flex gap-3 items-start"><i class="fa-solid fa-check text-brand-gold mt-0.5"></i> <span>Premium Ashray accommodation</span></li>
+                        <li class="flex gap-3 items-start"><i class="fa-solid fa-check text-brand-gold mt-0.5"></i> <span>Sattvic Breakfast &amp; Dinner daily</span></li>
+                        <li class="flex gap-3 items-start"><i class="fa-solid fa-check text-brand-gold mt-0.5"></i> <span>Temple Darshan Guidance &amp; Puja Thali</span></li>
+                        <li class="flex gap-3 items-start"><i class="fa-solid fa-check text-brand-gold mt-0.5"></i> <span>Evening Bonfire &amp; Bhajan arrangement</span></li>
+                    </ul>
+                    <button onclick="selectPackage('Darshan Basecamp')" class="w-full border-2 border-brand-gold text-brand-gold hover:bg-brand-gold hover:text-brand-maroon py-3 rounded-full font-bold transition">Inquire Package</button>
+                </div>
+
+                <!-- Package 2 (Featured) -->
+                <div class="pkg-card relative bg-gradient-to-br from-brand-saffron/80 to-brand-maroon/80 backdrop-blur-md border border-brand-gold/50 rounded-3xl p-8 md:-translate-y-5 shadow-2xl reveal" style="transition-delay:200ms">
+                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-brand-gold text-brand-maroon px-5 py-1.5 rounded-full font-bold text-xs shadow-lg tracking-wide uppercase whitespace-nowrap">✦ Most Chosen ✦</div>
+                    <div class="flex justify-between items-start border-b border-white/20 pb-5 mb-6 mt-2">
+                        <div>
+                            <h3 class="text-2xl font-bold text-white">Purna Parikrama</h3>
+                            <p class="text-white/60 text-sm mt-1">The Complete Experience</p>
+                        </div>
+                        <span class="bg-white text-brand-maroon px-3 py-1 rounded-full text-sm font-bold shrink-0 ml-2">3 Nights</span>
+                    </div>
+                    <ul class="space-y-3 mb-8 text-sm">
+                        <li class="flex gap-3 items-start"><i class="fa-solid fa-check text-brand-gold mt-0.5"></i> <span>All features of Darshan Basecamp</span></li>
+                        <li class="flex gap-3 items-start"><i class="fa-solid fa-check text-brand-gold mt-0.5"></i> <span>Guided Midal Village Heritage Walk</span></li>
+                        <li class="flex gap-3 items-start"><i class="fa-solid fa-check text-brand-gold mt-0.5"></i> <span>Special Local Cuisine Tasting (Siddu)</span></li>
+                        <li class="flex gap-3 items-start"><i class="fa-solid fa-check text-brand-gold mt-0.5"></i> <span>Packed lunch for return journey</span></li>
+                    </ul>
+                    <button onclick="selectPackage('Purna Parikrama')" class="w-full bg-white text-brand-maroon hover:bg-brand-gold py-3 rounded-full font-bold transition shadow-lg">Inquire Package</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════ SATTVIC FOOD ═══════════ -->
+    <section id="food" class="py-28 bg-brand-light dark:bg-brand-dark relative overflow-hidden">
+        <div class="absolute -left-32 bottom-0 w-80 h-80 rounded-full bg-brand-gold/8 blur-3xl pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16 reveal">
+                <div class="section-tag justify-center" data-i18n="food_tag"><i class="fa-solid fa-bowl-rice"></i> <span>Sacred Nourishment</span></div>
+                <h2 class="heading-serif text-3xl md:text-5xl font-bold text-brand-maroon dark:text-white" data-i18n="food_title">Sattvic Bhojan</h2>
+                <p class="mt-4 text-gray-500 dark:text-gray-400 max-w-2xl mx-auto" data-i18n="food_sub">Pure, wholesome vegetarian meals prepared with love and devotion in the Himalayan tradition. Every meal is an offering to Mata.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Food Item 1 -->
+                <div class="food-card bg-white dark:bg-gray-800 shadow-lg border border-brand-saffron/10 reveal group">
+                    <div class="relative h-52 img-hover-zoom">
+                        <img src="https://images.unsplash.com/photo-1547592180-85f173990554?q=80&w=800&auto=format&fit=crop" alt="Dal Tadka" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-maroon/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400"></div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="font-bold text-brand-maroon dark:text-white">Sattvic Dal Tadka</h3>
+                            <span class="text-brand-gold"><i class="fa-solid fa-star text-xs"></i><i class="fa-solid fa-star text-xs"></i><i class="fa-solid fa-star text-xs"></i><i class="fa-solid fa-star text-xs"></i><i class="fa-solid fa-star text-xs"></i></span>
+                        </div>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">Slow-cooked lentils tempered with pure ghee, cumin &amp; asafoetida. Soul-warming Himalayan comfort.</p>
+                        <div class="mt-3 flex items-center gap-2"><span class="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full font-medium">Pure Veg</span><span class="text-xs text-gray-400">Breakfast &amp; Dinner</span></div>
+                    </div>
+                </div>
+
+                <!-- Food Item 2 -->
+                <div class="food-card bg-white dark:bg-gray-800 shadow-lg border border-brand-saffron/10 reveal group" style="transition-delay:100ms">
+                    <div class="relative h-52 img-hover-zoom">
+                        <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?q=80&w=800&auto=format&fit=crop" alt="Himachali Thali" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-maroon/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400"></div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="font-bold text-brand-maroon dark:text-white">Himachali Thali</h3>
+                            <span class="text-brand-gold"><i class="fa-solid fa-star text-xs"></i><i class="fa-solid fa-star text-xs"></i><i class="fa-solid fa-star text-xs"></i><i class="fa-solid fa-star text-xs"></i><i class="fa-solid fa-star text-xs"></i></span>
+                        </div>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">A full traditional thali with rice, daal, saag, rajma, roti &amp; homemade achaar from the mountains.</p>
+                        <div class="mt-3 flex items-center gap-2"><span class="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full font-medium">Pure Veg</span><span class="text-xs text-gray-400">Lunch &amp; Dinner</span></div>
+                    </div>
+                </div>
+
+                <!-- Food Item 3 -->
+                <div class="food-card bg-white dark:bg-gray-800 shadow-lg border border-brand-saffron/10 reveal group" style="transition-delay:200ms">
+                    <div class="relative h-52 img-hover-zoom">
+                        <img src="https://images.unsplash.com/photo-1567337710282-00832b415979?q=80&w=800&auto=format&fit=crop" alt="Mountain Chai" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-maroon/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400"></div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="font-bold text-brand-maroon dark:text-white">Mountain Herb Chai</h3>
+                            <span class="text-brand-gold"><i class="fa-solid fa-star text-xs"></i><i class="fa-solid fa-star text-xs"></i><i class="fa-solid fa-star text-xs"></i><i class="fa-solid fa-star text-xs"></i><i class="fa-regular fa-star text-xs"></i></span>
+                        </div>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">Handpicked wild herbs steeped with cardamom, ginger &amp; pure Himalayan milk. A morning ritual.</p>
+                        <div class="mt-3 flex items-center gap-2"><span class="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full font-medium">Pure Veg</span><span class="text-xs text-gray-400">Anytime</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-10 bg-brand-saffron/10 dark:bg-gray-800 border border-brand-saffron/20 rounded-2xl p-6 text-center max-w-2xl mx-auto reveal">
+                <i class="fa-solid fa-circle-info text-brand-saffron mr-2"></i>
+                <span class="text-sm text-gray-700 dark:text-gray-300">All meals are <strong class="text-brand-maroon dark:text-brand-gold">100% vegetarian</strong>. Alcohol and non-vegetarian food are strictly prohibited on the premises out of respect for Mata's sacred grounds.</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════ GALLERY ═══════════ -->
+    <section id="gallery" class="py-28 bg-white dark:bg-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <div class="section-tag justify-center">Visual Journey</div>
+                <h2 class="heading-serif text-3xl md:text-5xl font-bold text-brand-maroon dark:text-white">Glimpses of Midal</h2>
+                <p class="mt-4 text-gray-500 dark:text-gray-400 max-w-xl mx-auto">A window into the sacred beauty of Pangi Valley</p>
+            </div>
+            <div class="gallery-grid reveal">
+                <div class="gallery-item h-80" onclick="openLightbox(0)">
+                    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=800&auto=format&fit=crop" alt="Himalayan peaks">
+                    <div class="overlay"><span class="text-white text-sm font-bold">Pangi Valley Peaks</span></div>
+                </div>
+                <div class="gallery-item h-36" onclick="openLightbox(1)">
+                    <img src="https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?q=80&w=800&auto=format&fit=crop" alt="Temple bells">
+                    <div class="overlay"><span class="text-white text-sm font-bold">Temple Bells</span></div>
+                </div>
+                <div class="gallery-item h-36" onclick="openLightbox(2)">
+                    <img src="https://images.unsplash.com/photo-1627894483216-2138af692e32?q=80&w=800&auto=format&fit=crop" alt="Himalayan view">
+                    <div class="overlay"><span class="text-white text-sm font-bold">Morning Darshan</span></div>
+                </div>
+                <div class="gallery-item h-52" onclick="openLightbox(3)">
+                    <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1200&auto=format&fit=crop" alt="Mountain landscape">
+                    <div class="overlay"><span class="text-white text-sm font-bold">Sacred Himalayan Pass</span></div>
+                </div>
+                <div class="gallery-item h-52" onclick="openLightbox(4)">
+                    <img src="https://images.unsplash.com/photo-1598928506311-c55dd1b764cb?q=80&w=800&auto=format&fit=crop" alt="Cozy room">
+                    <div class="overlay"><span class="text-white text-sm font-bold">Ashray Interiors</span></div>
+                </div>
+                <div class="gallery-item h-52" onclick="openLightbox(5)">
+                    <img src="https://images.unsplash.com/photo-1534430480872-3498386e7856?q=80&w=800&auto=format&fit=crop" alt="Bonfire">
+                    <div class="overlay"><span class="text-white text-sm font-bold">Evening Bonfire</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div id="lightbox">
+        <span id="lightbox-close" onclick="closeLightbox()"><i class="fa-solid fa-xmark"></i></span>
+        <button class="lightbox-nav" id="lb-prev" onclick="lightboxNav(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+        <img id="lightbox-img" src="" alt="">
+        <button class="lightbox-nav" id="lb-next" onclick="lightboxNav(1)"><i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+
+    <!-- ═══════════ TESTIMONIALS ═══════════ -->
+    <section id="testimonials" class="py-28 bg-brand-light dark:bg-brand-dark relative overflow-hidden">
+        <div class="absolute inset-0 pattern-bg opacity-50 pointer-events-none"></div>
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16 reveal">
+                <div class="section-tag justify-center"><i class="fa-solid fa-quote-left"></i> <span>Yatri Voices</span></div>
+                <h2 class="heading-serif text-3xl md:text-5xl font-bold text-brand-maroon dark:text-white">What Devotees Say</h2>
+            </div>
+
+            <div class="testimonial-slider reveal">
+                <div class="testimonial-track" id="testimonial-track">
+                    <!-- T1 -->
+                    <div class="testimonial-card">
+                        <div class="bg-white dark:bg-gray-800 rounded-3xl p-8 md:p-10 shadow-xl border border-brand-saffron/15 mx-2">
+                            <div class="flex items-center gap-1 text-brand-gold mb-4">
+                                <i class="fa-solid fa-star text-sm"></i><i class="fa-solid fa-star text-sm"></i><i class="fa-solid fa-star text-sm"></i><i class="fa-solid fa-star text-sm"></i><i class="fa-solid fa-star text-sm"></i>
+                            </div>
+                            <i class="fa-solid fa-quote-left text-brand-saffron/20 text-5xl mb-4 block"></i>
+                            <p class="text-gray-700 dark:text-gray-300 leading-relaxed text-lg mb-6">"Staying at Arvind Ji's homestay was the most spiritually fulfilling experience of my life. The proximity to the temple, the pure sattvic meals, and the warmth of the family — everything felt like Mata's own blessing."</p>
+                            <div class="flex items-center gap-4 border-t border-brand-saffron/10 pt-5">
+                                <div class="w-12 h-12 rounded-full bg-brand-saffron/15 flex items-center justify-center text-brand-saffron font-bold text-lg">R</div>
+                                <div>
+                                    <h4 class="font-bold text-brand-maroon dark:text-white">Rajesh Sharma</h4>
+                                    <p class="text-sm text-gray-400">Chandigarh, Punjab · Yatra 2024</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- T2 -->
+                    <div class="testimonial-card">
+                        <div class="bg-white dark:bg-gray-800 rounded-3xl p-8 md:p-10 shadow-xl border border-brand-saffron/15 mx-2">
+                            <div class="flex items-center gap-1 text-brand-gold mb-4">
+                                <i class="fa-solid fa-star text-sm"></i><i class="fa-solid fa-star text-sm"></i><i class="fa-solid fa-star text-sm"></i><i class="fa-solid fa-star text-sm"></i><i class="fa-solid fa-star text-sm"></i>
+                            </div>
+                            <i class="fa-solid fa-quote-left text-brand-saffron/20 text-5xl mb-4 block"></i>
+                            <p class="text-gray-700 dark:text-gray-300 leading-relaxed text-lg mb-6">"We traveled with our entire family, including elderly parents. Arvind Ji arranged everything so thoughtfully — comfortable rooms, hot food at every meal, and personal guidance for the darshan. Truly Atithi Devo Bhava in practice."</p>
+                            <div class="flex items-center gap-4 border-t border-brand-saffron/10 pt-5">
+                                <div class="w-12 h-12 rounded-full bg-brand-gold/20 flex items-center justify-center text-brand-gold font-bold text-lg">S</div>
+                                <div>
+                                    <h4 class="font-bold text-brand-maroon dark:text-white">Sunita Devi</h4>
+                                    <p class="text-sm text-gray-400">Shimla, Himachal · Yatra 2023</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- T3 -->
+                    <div class="testimonial-card">
+                        <div class="bg-white dark:bg-gray-800 rounded-3xl p-8 md:p-10 shadow-xl border border-brand-saffron/15 mx-2">
+                            <div class="flex items-center gap-1 text-brand-gold mb-4">
+                                <i class="fa-solid fa-star text-sm"></i><i class="fa-solid fa-star text-sm"></i><i class="fa-solid fa-star text-sm"></i><i class="fa-solid fa-star text-sm"></i><i class="fa-regular fa-star text-sm"></i>
+                            </div>
+                            <i class="fa-solid fa-quote-left text-brand-saffron/20 text-5xl mb-4 block"></i>
+                            <p class="text-gray-700 dark:text-gray-300 leading-relaxed text-lg mb-6">"The road to Pangi Valley is challenging, but arriving at this homestay felt like reaching home. The mountain herb chai in the mornings and the bonfire bhajans in the evenings — I will carry these memories forever. Jai Mata Di!"</p>
+                            <div class="flex items-center gap-4 border-t border-brand-saffron/10 pt-5">
+                                <div class="w-12 h-12 rounded-full bg-brand-maroon/10 flex items-center justify-center text-brand-maroon font-bold text-lg">A</div>
+                                <div>
+                                    <h4 class="font-bold text-brand-maroon dark:text-white">Amit Verma</h4>
+                                    <p class="text-sm text-gray-400">Delhi, NCR · Yatra 2024</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- T4 -->
+                    <div class="testimonial-card">
+                        <div class="bg-white dark:bg-gray-800 rounded-3xl p-8 md:p-10 shadow-xl border border-brand-saffron/15 mx-2">
+                            <div class="flex items-center gap-1 text-brand-gold mb-4">
+                                <i class="fa-solid fa-star text-sm"></i><i class="fa-solid fa-star text-sm"></i><i class="fa-solid fa-star text-sm"></i><i class="fa-solid fa-star text-sm"></i><i class="fa-solid fa-star text-sm"></i>
+                            </div>
+                            <i class="fa-solid fa-quote-left text-brand-saffron/20 text-5xl mb-4 block"></i>
+                            <p class="text-gray-700 dark:text-gray-300 leading-relaxed text-lg mb-6">"As a solo woman traveler, I was a bit nervous about visiting such a remote area. But Arvind Ji's family made me feel completely safe and cared for. The Purna Parikrama package was absolutely worth every penny."</p>
+                            <div class="flex items-center gap-4 border-t border-brand-saffron/10 pt-5">
+                                <div class="w-12 h-12 rounded-full bg-brand-gold/20 flex items-center justify-center text-brand-gold font-bold text-lg">P</div>
+                                <div>
+                                    <h4 class="font-bold text-brand-maroon dark:text-white">Priya Negi</h4>
+                                    <p class="text-sm text-gray-400">Dehradun, Uttarakhand · Yatra 2023</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Dots -->
+                <div class="flex justify-center gap-2 mt-8" id="testimonial-dots"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════ GUIDELINES ═══════════ -->
+    <section id="guidelines" class="py-28 bg-white dark:bg-gray-900 border-b border-brand-saffron/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- What to Pack -->
+                <div class="reveal">
+                    <div class="section-tag" data-i18n="guide_tag">Preparation</div>
+                    <h2 class="heading-serif text-3xl md:text-4xl font-bold mt-2 mb-4 text-brand-maroon dark:text-white" data-i18n="guide_title">Yatra Essentials &amp; Etiquette</h2>
+                    <p class="text-gray-500 dark:text-gray-400 mb-8 text-sm">Ensure your pilgrimage is safe, respectful, and fulfilling by following these local guidelines.</p>
+                    <div class="bg-brand-light dark:bg-gray-800 rounded-2xl p-6 border border-brand-saffron/20 shadow-sm">
+                        <h4 class="font-bold text-lg text-brand-maroon dark:text-brand-gold border-b border-brand-saffron/20 pb-3 mb-5"><i class="fa-solid fa-suitcase-rolling mr-2"></i>What to Pack</h4>
+                        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-gray-700 dark:text-gray-300">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-green-500"></i> Heavy woolens (even in summer)</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-green-500"></i> Sturdy trekking shoes</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-green-500"></i> Basic medical kit / altitude meds</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-green-500"></i> Cash (ATMs are very rare)</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-green-500"></i> Valid Govt ID / Aadhaar</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-green-500"></i> Raincoat / Umbrella</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-green-500"></i> Torch / Headlamp</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-green-500"></i> Power bank (charging limited)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Temple Etiquette -->
+                <div class="reveal" style="transition-delay:200ms">
+                    <div class="h-full bg-brand-light dark:bg-gray-800 rounded-2xl p-8 border-l-4 border-brand-saffron shadow-md">
+                        <h4 class="font-bold text-xl text-brand-maroon dark:text-brand-gold mb-6"><i class="fa-solid fa-hands-praying mr-2"></i>Temple Etiquette</h4>
+                        <div class="space-y-6">
+                            <div class="flex gap-4">
+                                <div class="w-10 h-10 rounded-full bg-brand-saffron/10 flex items-center justify-center shrink-0 text-brand-saffron font-bold border border-brand-saffron/20">1</div>
+                                <div>
+                                    <h5 class="font-bold dark:text-white text-sm">Purity of Body and Mind</h5>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Bathe before visiting the temple. Alcohol and non-veg food are strictly prohibited during the Yatra.</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4">
+                                <div class="w-10 h-10 rounded-full bg-brand-saffron/10 flex items-center justify-center shrink-0 text-brand-saffron font-bold border border-brand-saffron/20">2</div>
+                                <div>
+                                    <h5 class="font-bold dark:text-white text-sm">Appropriate Attire</h5>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Wear modest clothing covering shoulders and knees. Head covering (chunni/cap) is recommended inside the sanctum.</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4">
+                                <div class="w-10 h-10 rounded-full bg-brand-saffron/10 flex items-center justify-center shrink-0 text-brand-saffron font-bold border border-brand-saffron/20">3</div>
+                                <div>
+                                    <h5 class="font-bold dark:text-white text-sm">Photography Restrictions</h5>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Respect signs regarding photography inside the main temple. Focus on inner devotion rather than digital capture.</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4">
+                                <div class="w-10 h-10 rounded-full bg-brand-saffron/10 flex items-center justify-center shrink-0 text-brand-saffron font-bold border border-brand-saffron/20">4</div>
+                                <div>
+                                    <h5 class="font-bold dark:text-white text-sm">Respect Local Customs</h5>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Seek permission before photographing villagers. Support local artisans and avoid plastic waste in the valley.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════ BOOKING ═══════════ -->
+    <section id="booking" class="py-28 bg-gray-50 dark:bg-brand-dark relative overflow-hidden">
+        <div class="absolute inset-0 pattern-bg opacity-60 pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="bg-white dark:bg-gray-800 rounded-3xl overflow-hidden shadow-2xl reveal border border-brand-saffron/15 grid grid-cols-1 lg:grid-cols-5">
+
+                <!-- Info Panel -->
+                <div class="bg-brand-maroon text-white p-10 lg:col-span-2 flex flex-col justify-between relative overflow-hidden">
+                    <div class="absolute top-0 right-0 opacity-8 text-[12rem] text-brand-gold transform translate-x-8 -translate-y-6 pointer-events-none"><i class="fa-solid fa-om"></i></div>
+                    <div class="relative z-10">
+                        <h2 class="heading-serif text-3xl font-bold text-brand-gold mb-3" data-i18n="book_title">Plan Your Yatra</h2>
+                        <p class="text-brand-light/70 mb-10 text-sm leading-relaxed" data-i18n="book_sub">Secure your peaceful stay near Mindal Mata. Select your dates and package below.</p>
+                        <div class="space-y-5">
+                            <div class="flex items-start gap-4">
+                                <div class="w-9 h-9 rounded-full bg-brand-gold/20 border border-brand-gold/30 flex items-center justify-center shrink-0 mt-0.5">
+                                    <i class="fa-solid fa-location-dot text-brand-gold text-sm"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-sm">Location</h4>
+                                    <p class="text-xs text-brand-light/60 mt-0.5">Midal Village, Pangi Valley, Himachal Pradesh</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="w-9 h-9 rounded-full bg-brand-gold/20 border border-brand-gold/30 flex items-center justify-center shrink-0 mt-0.5">
+                                    <i class="fa-solid fa-phone text-brand-gold text-sm"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-sm">Contact Arvind Ji</h4>
+                                    <p class="text-xs text-brand-light/60 mt-0.5">+91 94183 04396</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="w-9 h-9 rounded-full bg-brand-gold/20 border border-brand-gold/30 flex items-center justify-center shrink-0 mt-0.5">
+                                    <i class="fa-brands fa-whatsapp text-brand-gold text-sm"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-sm">WhatsApp Booking</h4>
+                                    <p class="text-xs text-brand-light/60 mt-0.5">Instant confirmation via chat</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="w-9 h-9 rounded-full bg-brand-gold/20 border border-brand-gold/30 flex items-center justify-center shrink-0 mt-0.5">
+                                    <i class="fa-solid fa-calendar text-brand-gold text-sm"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-sm">Season Open</h4>
+                                    <p class="text-xs text-brand-light/60 mt-0.5">June – October (Yatra Season)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative z-10 mt-10 pt-6 border-t border-white/10">
+                        <p class="text-brand-gold/70 text-xs italic">"The doors of Mindal Mata are always open for the devoted heart."</p>
+                    </div>
+                </div>
+
+                <!-- Form Panel -->
+                <div class="p-10 lg:col-span-3">
+                    <h3 class="heading-serif text-2xl text-brand-maroon dark:text-brand-gold mb-6">Booking Inquiry</h3>
+                    <form id="booking-form" class="space-y-5" action="https://formsubmit.co/el/demeye" method="POST">
+                        <input type="hidden" name="_captcha" value="false">
+                        <input type="hidden" name="_subject" value="New Yatra Booking Request!">
+                        <input type="hidden" name="_template" value="table">
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                            <div>
+                                <label class="block text-xs font-bold text-gray-600 dark:text-gray-400 mb-1.5 uppercase tracking-wide">Lead Yatri Name</label>
+                                <input type="text" name="Guest_Name" required placeholder="Your full name" class="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-brand-saffron outline-none transition text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-600 dark:text-gray-400 mb-1.5 uppercase tracking-wide">Phone / WhatsApp</label>
+                                <input type="tel" name="Phone_Number" required placeholder="+91 XXXXX XXXXX" class="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-brand-saffron outline-none transition text-sm">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                            <div>
+                                <label class="block text-xs font-bold text-gray-600 dark:text-gray-400 mb-1.5 uppercase tracking-wide">Select Dates</label>
+                                <input type="text" id="date-picker" name="Dates" placeholder="Check In → Check Out" required class="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-brand-saffron outline-none transition cursor-pointer text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-600 dark:text-gray-400 mb-1.5 uppercase tracking-wide">Interested In</label>
+                                <select id="package-select" name="Package" class="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-brand-saffron outline-none transition text-sm">
+                                    <option value="Room Only">Room Only</option>
+                                    <option value="Darshan Basecamp">Darshan Basecamp Package</option>
+                                    <option value="Purna Parikrama">Purna Parikrama Package</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-gray-600 dark:text-gray-400 mb-2 uppercase tracking-wide">Number of Yatris</label>
+                            <div class="flex gap-5">
+                                <label class="flex items-center gap-2 cursor-pointer text-sm"><input type="radio" name="Guests" value="1-2" checked class="accent-brand-saffron"> <span class="dark:text-gray-300">1–2</span></label>
+                                <label class="flex items-center gap-2 cursor-pointer text-sm"><input type="radio" name="Guests" value="3-4" class="accent-brand-saffron"> <span class="dark:text-gray-300">3–4</span></label>
+                                <label class="flex items-center gap-2 cursor-pointer text-sm"><input type="radio" name="Guests" value="5+" class="accent-brand-saffron"> <span class="dark:text-gray-300">5+ Group</span></label>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-gray-600 dark:text-gray-400 mb-1.5 uppercase tracking-wide">Special Requests (Optional)</label>
+                            <textarea name="Special_Requests" rows="2" placeholder="Elderly guests, special requirements, etc." class="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-brand-saffron outline-none transition text-sm resize-none"></textarea>
+                        </div>
+
+                        <div class="pt-2 flex flex-col sm:flex-row gap-4">
+                            <button type="submit" class="flex-1 bg-gradient-to-r from-brand-maroon to-brand-saffron text-white py-4 rounded-xl font-bold hover:opacity-90 transition shadow-lg text-sm flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-paper-plane"></i> Send Booking Request
+                            </button>
+                            <button type="button" onclick="openWhatsApp()" class="flex-1 bg-[#25D366] text-white py-4 rounded-xl font-bold hover:bg-[#128C7E] transition flex items-center justify-center gap-2 shadow-lg text-sm">
+                                <i class="fa-brands fa-whatsapp text-xl"></i> Chat on WhatsApp
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════ MODAL ═══════════ -->
+    <div id="custom-modal" class="fixed inset-0 z-[100] bg-black/60 hidden items-center justify-center backdrop-blur-sm opacity-0">
+        <div class="bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-2xl max-w-sm w-full text-center border border-brand-saffron/20 transform scale-95 transition-transform duration-300" id="modal-content">
+            <div class="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl"><i class="fa-solid fa-check"></i></div>
+            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Jai Mata Di!</h3>
+            <p class="text-gray-500 dark:text-gray-300 mb-6 text-sm">Your inquiry has been sent to Arvind Ji. We will contact you shortly. 🙏</p>
+            <button onclick="closeModal()" class="bg-brand-saffron text-white px-6 py-2.5 rounded-full font-bold w-full hover:bg-brand-maroon transition">Close</button>
+        </div>
+    </div>
+
+    <!-- ═══════════ FOOTER ═══════════ -->
+    <footer class="bg-brand-dark text-white pt-20 pb-8 border-t-4 border-brand-saffron">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-16">
+
+                <!-- Brand -->
+                <div class="lg:col-span-1">
+                    <div class="flex items-center gap-3 mb-5">
+                        <div class="w-10 h-10 rounded-full bg-brand-saffron/15 border border-brand-gold/20 flex items-center justify-center">
+                            <i class="fa-solid fa-om text-brand-gold text-xl"></i>
+                        </div>
+                        <span class="font-bold text-lg text-white">Arvind Thapliyal</span>
+                    </div>
+                    <p class="text-white/50 text-sm leading-relaxed mb-6">Serving pilgrims with pure, authentic Himalayan hospitality in the sacred land of Mindal Mata, Pangi Valley.</p>
+                    <div class="flex gap-3">
+                        <a href="https://wa.me/919418304396" target="_blank" class="w-9 h-9 rounded-full bg-[#25D366]/20 border border-[#25D366]/30 flex items-center justify-center text-[#25D366] hover:bg-[#25D366] hover:text-white transition text-sm">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </a>
+                        <a href="#" class="w-9 h-9 rounded-full bg-brand-saffron/15 border border-brand-saffron/20 flex items-center justify-center text-brand-saffron hover:bg-brand-saffron hover:text-white transition text-sm">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-9 h-9 rounded-full bg-brand-gold/15 border border-brand-gold/20 flex items-center justify-center text-brand-gold hover:bg-brand-gold hover:text-brand-dark transition text-sm">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="font-bold text-brand-gold text-sm uppercase tracking-widest mb-5">Quick Links</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="#about" class="text-white/50 hover:text-brand-saffron transition flex items-center gap-2"><i class="fa-solid fa-angle-right text-brand-saffron/50 text-xs"></i> The Yatra</a></li>
+                        <li><a href="#how-to-reach" class="text-white/50 hover:text-brand-saffron transition flex items-center gap-2"><i class="fa-solid fa-angle-right text-brand-saffron/50 text-xs"></i> How to Reach</a></li>
+                        <li><a href="#rooms" class="text-white/50 hover:text-brand-saffron transition flex items-center gap-2"><i class="fa-solid fa-angle-right text-brand-saffron/50 text-xs"></i> Ashray (Rooms)</a></li>
+                        <li><a href="#packages" class="text-white/50 hover:text-brand-saffron transition flex items-center gap-2"><i class="fa-solid fa-angle-right text-brand-saffron/50 text-xs"></i> Yatra Packages</a></li>
+                        <li><a href="#food" class="text-white/50 hover:text-brand-saffron transition flex items-center gap-2"><i class="fa-solid fa-angle-right text-brand-saffron/50 text-xs"></i> Sattvic Food</a></li>
+                        <li><a href="#guidelines" class="text-white/50 hover:text-brand-saffron transition flex items-center gap-2"><i class="fa-solid fa-angle-right text-brand-saffron/50 text-xs"></i> Guidelines</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div>
+                    <h4 class="font-bold text-brand-gold text-sm uppercase tracking-widest mb-5">Contact Us</h4>
+                    <ul class="space-y-4 text-sm">
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-location-dot text-brand-saffron mt-0.5 shrink-0"></i>
+                            <span class="text-white/50">Midal Village, Pangi Valley,<br>Chamba, Himachal Pradesh</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-phone text-brand-saffron shrink-0"></i>
+                            <a href="tel:+919418304396" class="text-white/50 hover:text-brand-saffron transition">+91 94183 04396</a>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-brands fa-whatsapp text-brand-saffron shrink-0"></i>
+                            <a href="https://wa.me/919418304396" class="text-white/50 hover:text-brand-saffron transition">WhatsApp Arvind Ji</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Season & Prayer -->
+                <div>
+                    <h4 class="font-bold text-brand-gold text-sm uppercase tracking-widest mb-5">Yatra Season</h4>
+                    <div class="bg-white/5 rounded-2xl p-5 border border-brand-gold/15 mb-5">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-xs text-white/60">Season Opens</span>
+                            <span class="text-xs font-bold text-brand-gold">June</span>
+                        </div>
+                        <div class="w-full bg-white/10 rounded-full h-1.5 mb-3">
+                            <div class="bg-gradient-to-r from-brand-saffron to-brand-gold h-1.5 rounded-full" style="width: 75%"></div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-white/60">Season Closes</span>
+                            <span class="text-xs font-bold text-brand-gold">October</span>
+                        </div>
+                    </div>
+                    <p class="text-white/40 text-xs italic leading-relaxed">"यात्रा मंज़िल से ज़्यादा रास्ते के बारे में है।"<br><span class="not-italic">The journey is about the path, not just the destination.</span></p>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <i class="fa-solid fa-om text-brand-gold"></i>
+                    <span class="text-white/40 text-xs">© 2026 Arvind Thapliyal Homestay. Developed with devotion.</span>
+                </div>
+                <div class="flex items-center gap-4 text-xs text-white/30">
+                    <span class="flex items-center gap-1"><i class="fa-solid fa-lock text-brand-saffron/50"></i> Secure Booking</span>
+                    <span>·</span>
+                    <span>Pangi Valley, HP</span>
+                    <span>·</span>
+                    <span>Jai Mata Di 🙏</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ═══════════ SCRIPTS ═══════════ -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+        // ─── 1. Loader ───
+        const loader = document.getElementById('loader');
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                loader.style.opacity = '0';
+                setTimeout(() => loader.style.display = 'none', 600);
+            }, 1200);
+        });
+
+        // ─── 2. Diya Particles ───
+        const diyaContainer = document.getElementById('diya-container');
+        for (let i = 0; i < 18; i++) {
+            const d = document.createElement('div');
+            d.className = 'diya-particle';
+            d.style.cssText = `
+                left: ${Math.random() * 100}%;
+                --dur: ${6 + Math.random() * 6}s;
+                --delay: ${Math.random() * 8}s;
+                width: ${4 + Math.random() * 6}px;
+                height: ${4 + Math.random() * 6}px;
+            `;
+            diyaContainer.appendChild(d);
+        }
+
+        // ─── 3. Flatpickr ───
+        flatpickr("#date-picker", {
+            mode: "range",
+            minDate: "today",
+            dateFormat: "Y-m-d",
+            showMonths: window.innerWidth > 768 ? 2 : 1,
+            altInput: true,
+            altFormat: "F j, Y",
+        });
+
+        // ─── 4. Package Select Helper ───
+        window.selectPackage = function(pkgName) {
+            document.getElementById('package-select').value = pkgName;
+            document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
+        };
+
+        // ─── 5. WhatsApp ───
+        window.openWhatsApp = function() {
+            const text = "Jai Mata Di! I am interested in booking a stay at Arvind Thapliyal Homestay.";
+            window.open(`https://wa.me/919418304396?text=${encodeURIComponent(text)}`, '_blank');
+        };
+
+        // ─── 6. Form Submit ───
+        const form = document.getElementById('booking-form');
+        form.addEventListener('submit', () => {
+            const btn = form.querySelector('button[type="submit"]');
+            btn.innerHTML = '<i class="fa-solid fa-om fa-spin mr-2"></i> Sending...';
+            btn.disabled = true;
+        });
+
+        // ─── 7. Modal ───
+        window.closeModal = function() {
+            const modal = document.getElementById('custom-modal');
+            const mc = document.getElementById('modal-content');
+            modal.classList.add('opacity-0');
+            mc.classList.remove('scale-100');
+            mc.classList.add('scale-95');
+            setTimeout(() => { modal.classList.add('hidden'); modal.classList.remove('flex'); }, 300);
+        };
+
+        // ─── 8. Ambient Audio ───
+        let audioCtx = null, isPlaying = false, masterGain = null, oscillators = [];
+        function initAudio() {
+            const AC = window.AudioContext || window.webkitAudioContext;
+            audioCtx = new AC();
+            masterGain = audioCtx.createGain();
+            masterGain.gain.value = 0;
+            masterGain.connect(audioCtx.destination);
+            [130.81, 196.00, 261.63].forEach(freq => {
+                const osc = audioCtx.createOscillator();
+                const g = audioCtx.createGain();
+                const lfo = audioCtx.createOscillator();
+                const lg = audioCtx.createGain();
+                osc.type = 'sine';
+                osc.frequency.value = freq;
+                lfo.type = 'sine';
+                lfo.frequency.value = 0.1 + Math.random() * 0.1;
+                lg.gain.value = 0.2;
+                g.gain.value = 0.15;
+                lfo.connect(lg); lg.connect(g.gain);
+                osc.connect(g); g.connect(masterGain);
+                osc.start(); lfo.start();
+                oscillators.push({ osc, lfo });
+            });
+        }
+        const audioToggle = document.getElementById('audio-toggle');
+        const audioIcon = document.getElementById('audio-icon');
+        audioToggle.addEventListener('click', () => {
+            if (!audioCtx) initAudio();
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            if (isPlaying) {
+                masterGain.gain.setTargetAtTime(0, audioCtx.currentTime, 1);
+                audioIcon.className = 'fa-solid fa-volume-xmark text-lg';
+                audioToggle.style.background = '';
+            } else {
+                masterGain.gain.setTargetAtTime(0.8, audioCtx.currentTime, 2);
+                audioIcon.className = 'fa-solid fa-music text-lg animate-pulse';
+                audioToggle.style.background = 'var(--saffron)';
+            }
+            isPlaying = !isPlaying;
+        });
+
+        // ─── 9. Scroll Reveal ───
+        const ro = new IntersectionObserver((entries, obs) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('active'); obs.unobserve(e.target); } });
+        }, { threshold: 0.1, rootMargin: "0px 0px -40px 0px" });
+        document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+        // ─── 10. Dark Mode ───
+        function toggleTheme() {
+            document.documentElement.classList.toggle('dark');
+            const d = document.documentElement.classList.contains('dark');
+            ['theme-icon','theme-icon-mobile'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.className = d ? 'fa-solid fa-sun text-base' : 'fa-solid fa-moon text-base';
+            });
+        }
+        document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
+        document.getElementById('theme-toggle-mobile').addEventListener('click', toggleTheme);
+
+        // ─── 11. Mobile Menu ───
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+            const icon = menu.classList.contains('hidden') ? 'fa-bars' : 'fa-xmark';
+            btn.innerHTML = `<i class="fa-solid ${icon} text-xl"></i>`;
+        });
+        document.querySelectorAll('.mobile-link').forEach(l => l.addEventListener('click', () => {
+            menu.classList.add('hidden');
+            btn.innerHTML = '<i class="fa-solid fa-bars text-xl"></i>';
+        }));
+
+        // ─── 12. Scroll To Top ───
+        const scrollTopBtn = document.getElementById('scroll-top');
+        window.addEventListener('scroll', () => {
+            scrollTopBtn.classList.toggle('visible', window.scrollY > 600);
+        });
+        scrollTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+        // ─── 13. Stats Counter ───
+        const statNums = document.querySelectorAll('.stat-num');
+        const counterObs = new IntersectionObserver((entries, obs) => {
+            entries.forEach(e => {
+                if (!e.isIntersecting) return;
+                const el = e.target;
+                const target = parseInt(el.dataset.target);
+                let start = 0;
+                const duration = 1600;
+                const step = (timestamp) => {
+                    if (!start) start = timestamp;
+                    const progress = Math.min((timestamp - start) / duration, 1);
+                    const eased = 1 - Math.pow(1 - progress, 3);
+                    el.textContent = Math.floor(eased * target).toLocaleString();
+                    if (progress < 1) requestAnimationFrame(step);
+                    else el.textContent = target.toLocaleString();
+                };
+                requestAnimationFrame(step);
+                obs.unobserve(el);
+            });
+        }, { threshold: 0.5 });
+        statNums.forEach(n => counterObs.observe(n));
+
+        // ─── 14. Testimonials Slider ───
+        const track = document.getElementById('testimonial-track');
+        const cards = track.querySelectorAll('.testimonial-card');
+        const dotsContainer = document.getElementById('testimonial-dots');
+        let current = 0;
+        let autoSlide;
+
+        cards.forEach((_, i) => {
+            const dot = document.createElement('div');
+            dot.className = `testimonial-dot${i === 0 ? ' active' : ''}`;
+            dot.addEventListener('click', () => goTo(i));
+            dotsContainer.appendChild(dot);
+        });
+
+        function goTo(idx) {
+            current = idx;
+            track.style.transform = `translateX(-${current * 100}%)`;
+            document.querySelectorAll('.testimonial-dot').forEach((d, i) => {
+                d.classList.toggle('active', i === current);
+            });
+        }
+
+        function startAuto() {
+            autoSlide = setInterval(() => goTo((current + 1) % cards.length), 5000);
+        }
+        startAuto();
+        track.addEventListener('mouseenter', () => clearInterval(autoSlide));
+        track.addEventListener('mouseleave', startAuto);
+
+        // ─── 15. Gallery Lightbox ───
+        const galleryImages = [
+            { src: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=1600', cap: 'Pangi Valley Peaks' },
+            { src: 'https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?q=80&w=1600', cap: 'Temple Bells' },
+            { src: 'https://images.unsplash.com/photo-1627894483216-2138af692e32?q=80&w=1600', cap: 'Morning Darshan' },
+            { src: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1600', cap: 'Sacred Himalayan Pass' },
+            { src: 'https://images.unsplash.com/photo-1598928506311-c55dd1b764cb?q=80&w=1600', cap: 'Ashray Interiors' },
+            { src: 'https://images.unsplash.com/photo-1534430480872-3498386e7856?q=80&w=1600', cap: 'Evening Bonfire' }
+        ];
+        let lbIdx = 0;
+        const lb = document.getElementById('lightbox');
+        const lbImg = document.getElementById('lightbox-img');
+
+        window.openLightbox = function(i) {
+            lbIdx = i;
+            lbImg.src = galleryImages[i].src;
+            lb.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        };
+        window.closeLightbox = function() {
+            lb.classList.remove('active');
+            document.body.style.overflow = '';
+        };
+        window.lightboxNav = function(dir) {
+            lbIdx = (lbIdx + dir + galleryImages.length) % galleryImages.length;
+            lbImg.src = galleryImages[lbIdx].src;
+        };
+        lb.addEventListener('click', e => { if (e.target === lb) closeLightbox(); });
+        document.addEventListener('keydown', e => {
+            if (!lb.classList.contains('active')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowRight') lightboxNav(1);
+            if (e.key === 'ArrowLeft') lightboxNav(-1);
+        });
+
+        // ─── 16. i18n ───
+        const i18n = {
+            "loader_text": { en: "Awaiting Mata's Blessings...", hi: "माता के आशीर्वाद की प्रतीक्षा..." },
+            "logo_sub": { en: "HOMESTAY & YATRA BASE", hi: "होमस्टे और यात्रा बेस" },
+            "nav_about": { en: "The Yatra", hi: "यात्रा" },
+            "nav_route": { en: "How to Reach", hi: "मार्ग" },
+            "nav_rooms": { en: "Ashray", hi: "आश्रय (कमरे)" },
+            "nav_packages": { en: "Packages", hi: "पैकेज" },
+            "nav_food": { en: "Sattvic Food", hi: "सात्विक भोजन" },
+            "nav_guide": { en: "Guidelines", hi: "दिशानिर्देश" },
+            "nav_book": { en: "Plan Yatra", hi: "बुकिंग करें" },
+            "hero_title": { en: "Divine Blessings &amp; <br><span class='text-transparent bg-clip-text bg-gradient-to-r from-brand-saffron to-brand-gold'>Himalayan Serenity</span>", hi: "दिव्य आशीर्वाद और <br><span class='text-transparent bg-clip-text bg-gradient-to-r from-brand-saffron to-brand-gold'>हिमालयी शांति</span>" },
+            "hero_sub": { en: "Your spiritual haven for the Mindal Mata Mandir Yatra. Experience peace, devotion, and warm comfort in Pangi Valley.", hi: "मिंदल माता मंदिर यात्रा के लिए आपका आध्यात्मिक आश्रय।" },
+            "btn_start": { en: "Start Your Yatra", hi: "यात्रा शुरू करें" },
+            "btn_route": { en: "View Route", hi: "मार्ग देखें" },
+            "stat1": { en: "Years of Hosting", hi: "वर्षों की सेवा" },
+            "stat2": { en: "Yatris Blessed", hi: "यात्री आशीर्वादित" },
+            "stat3": { en: "From the Temple", hi: "मंदिर से दूरी" },
+            "stat4": { en: "Guest Rating", hi: "अतिथि रेटिंग" },
+            "about_tag": { en: "The Holy Basecamp", hi: "पवित्र बेसकैंप" },
+            "about_title": { en: "Welcome to<br>Midal Village", hi: "मिंदल गांव में<br>आपका स्वागत है" },
+            "about_p1": { en: "Nestled in the pristine Pangi Valley, our homestay is just moments away from the revered <strong class='text-brand-maroon dark:text-brand-gold'>Mindal Mata Temple</strong>. We provide a pure, tranquil resting place for devotees undertaking the sacred yatra.", hi: "पांगी घाटी में स्थित, हमारा होमस्टे पवित्र <strong class='text-brand-maroon dark:text-brand-gold'>मिंदल माता मंदिर</strong> के बहुत करीब है।" },
+            "about_f1_t": { en: "Temple Proximity", hi: "मंदिर निकटता" },
+            "about_f1_d": { en: "Walking distance to Darshan", hi: "दर्शन के लिए पैदल दूरी" },
+            "about_f2_t": { en: "Sattvic Aura", hi: "सात्विक वातावरण" },
+            "about_f2_d": { en: "Pure vegetarian environment", hi: "शुद्ध शाकाहारी वातावरण" },
+            "route_tag": { en: "Plan Your Journey", hi: "यात्रा की योजना बनाएं" },
+            "route_title": { en: "How to Reach Pangi Valley", hi: "पांगी घाटी कैसे पहुँचें" },
+            "route_sub": { en: "Pangi Valley is a remote, majestic destination. Choose your path wisely based on the season.", hi: "पांगी घाटी एक सुदूर, भव्य गंतव्य है। मौसम के अनुसार अपना मार्ग चुनें।" },
+            "rooms_tag": { en: "Rest & Rejuvenate", hi: "विश्राम और नवजीवन" },
+            "rooms_title": { en: "Peaceful Ashray", hi: "शांतिपूर्ण आश्रय" },
+            "rooms_sub": { en: "Rest your mind and body after a day of devotion. Premium amenities in a traditional setting.", hi: "भक्ति के बाद अपने मन और शरीर को विश्राम दें।" },
+            "pkg_title": { en: "Curated Yatra Packages", hi: "विशेष यात्रा पैकेज" },
+            "pkg_sub": { en: "Choose the pilgrimage experience that resonates with your devotion.", hi: "अपनी भक्ति के अनुसार यात्रा अनुभव चुनें।" },
+            "food_tag": { en: "Sacred Nourishment", hi: "पवित्र भोजन" },
+            "food_title": { en: "Sattvic Bhojan", hi: "सात्विक भोजन" },
+            "food_sub": { en: "Pure, wholesome vegetarian meals prepared with love and devotion. Every meal is an offering to Mata.", hi: "प्रेम और भक्ति से तैयार शुद्ध शाकाहारी भोजन।" },
+            "guide_tag": { en: "Preparation", hi: "तैयारी" },
+            "guide_title": { en: "Yatra Essentials & Etiquette", hi: "यात्रा आवश्यक और शिष्टाचार" },
+            "book_title": { en: "Plan Your Yatra", hi: "अपनी यात्रा की योजना बनाएं" },
+            "book_sub": { en: "Secure your peaceful stay near Mindal Mata. Select your dates and package below.", hi: "मिंदल माता के पास अपना शांतिपूर्ण प्रवास सुनिश्चित करें।" },
+        };
+        let lang = 'en';
+        const langToggles = [document.getElementById('lang-toggle'), document.getElementById('lang-toggle-mobile')];
+        const langText = document.getElementById('lang-text');
+        function switchLang() {
+            lang = lang === 'en' ? 'hi' : 'en';
+            document.body.classList.toggle('lang-hi', lang === 'hi');
+            if (langText) langText.innerText = lang === 'en' ? 'HINDI' : 'ENG';
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (i18n[key]) el.innerHTML = i18n[key][lang];
+            });
+        }
+        langToggles.forEach(b => b?.addEventListener('click', switchLang));
+
+    });
+    </script>
+</body>
+</html>
